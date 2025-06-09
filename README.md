@@ -42,20 +42,6 @@ Link al diseño en Figma: https://www.figma.com/design/6uRpn3rJaPPZN0Za9UJrs3/te
 
 Interfaz dividida entre: index.html, login.html, resultados.html, nosotros.html y detalle.html
 
--Diseño de la base de datos-
-
-![Diagrama de base de datos](https://github.com/elianiubo/ventacar/blob/main/src/main/assets/DBrelational.jpeg?raw=true)
-
-Tablas: roles, user_roles, users, vehiculos
-
-Columnas de cada tabla:
-roles: id, name
-
-user_roles: user_id, role_id
-
-users: id, apellidos, código_postal, email, fecha_nacimiento, nombre, password, teléfono
-
-vehiculos: id, marca, tipo, precio, imagen, descripción
 
 Endpoints:
 GET /api/vehiculos/buscar
