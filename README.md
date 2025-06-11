@@ -1,6 +1,6 @@
 Ventacar - Proyecto WEB
 
-![Captura de pantalla](assets/Captura.png)
+![Captura de pantalla](src/main/assets/Captura.png)
 ![Captura de pantalla](assets/Captura2.png)
 
 
