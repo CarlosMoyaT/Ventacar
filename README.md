@@ -1,5 +1,9 @@
 Ventacar - Proyecto WEB
 
+![Captura de pantalla](assets/Captura.png)
+![Captura de pantalla](assets/Captura2.png)
+
+
 Ventacar es una aplicación web para la compra y reserva de coches. Ofrece una plataforma sencilla y accesible donde los usuarios pueden registrarse o iniciar sesión para explorar los vehículos, ver detalles específicos y realizar compras o reservas. Está diseñada tanto para clientes como para administradores que gestionarán los vehículos disponibles.
 
 -Funcionalidades básicas-
