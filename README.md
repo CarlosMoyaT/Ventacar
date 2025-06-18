@@ -20,7 +20,7 @@ Generación de facturas (PDF) personalizadas para el usuario.
 
 Envío de correos con factura integrada tanto para compras como para reservas de coches.
 
--Tecnologías y lenguajes de programación-
+-Tecnologías-
 
 Versión: JDK22, Jakarta EE 9
 
