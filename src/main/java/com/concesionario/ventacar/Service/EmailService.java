@@ -23,10 +23,16 @@ import java.util.Date;
 public class EmailService {
 
     @Autowired
-    private JavaMailSender javaMailSender;
+    private SenderNetClient senderNetClient;
 
     @Autowired
     private PdfService pdfService;
+
+    public void enviarCorreoRegistro(String destinatario) {
+        String subject = "Confirmación de registro";
+        String text = "Gracias por registrarte en Ventacar.";
+        senderNetClient.sendRegistrationEmail(destinatario, subject, text);
+    }
 
     /**
      * Envía un correo de confirmación de compra al usuario autenticado,
@@ -38,27 +44,17 @@ public class EmailService {
      * @throws IOException        si ocurre un error al generar el PDF.
      * @throws DocumentException  si ocurre un error en el documento PDF.
      */
-    public void enviarCorreoConfirmacion(String vehiculo, int precio)
-            throws MessagingException, IOException, DocumentException {
-
+    public void enviarCorreoConfirmacionCompra(String vehiculo, int precio) throws IOException, DocumentException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String destinatario = auth.getName();
 
         String fecha = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         File pdfFile = pdfService.createPdf(destinatario, vehiculo, fecha, precio);
 
-        MimeMessage mensaje = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mensaje, true);
+        String subject = "Confirmación de compra";
+        String text = "Gracias por tu compra.\nVehículo: " + vehiculo + "\nPrecio: " + precio + "\nFecha: " + fecha;
 
-        helper.setTo(destinatario);
-        helper.setSubject("Confirmación de la compra");
-        helper.setText("Gracias por realizar la compra de su vehículo. Aquí tiene los detalles:\n\n" +
-                "Vehículo: " + vehiculo + "\n" +
-                "Precio: " + precio + "\n" +
-                "Fecha: " + fecha + "\n");
-
-        helper.addAttachment("Factura.pdf", pdfFile);
-        javaMailSender.send(mensaje);
+        senderNetClient.sendPurchaseEmail(destinatario, subject, text, pdfFile);
     }
 
     /**
@@ -73,23 +69,15 @@ public class EmailService {
      * @throws DocumentException  si ocurre un error en el documento PDF.
      */
     public void enviarCorreoReserva(String destinatario, String vehiculo, String fechaReserva, int precio)
-            throws MessagingException, IOException, DocumentException {
-
-        Date fecha = parseFecha(fechaReserva);
+            throws IOException, DocumentException {
 
         File pdfFile = pdfService.createPdf(destinatario, vehiculo, fechaReserva, precio);
 
-        MimeMessage mensaje = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mensaje, true);
-
-        helper.setTo(destinatario);
-        helper.setSubject("Vehículo reservado");
-        helper.setText("Ha reservado su vehículo: " + vehiculo + "\n" +
+        String contenidoEmail = "Ha reservado su vehículo: " + vehiculo + "\n" +
                 "Fecha de la reserva: " + fechaReserva + "\n" +
-                "Precio: " + precio);
+                "Precio: " + precio;
 
-        helper.addAttachment("Reserva.pdf", pdfFile);
-        javaMailSender.send(mensaje);
+        senderNetClient.sendPurchaseEmail(destinatario, "Vehículo reservado", contenidoEmail, pdfFile);
     }
 
     /**

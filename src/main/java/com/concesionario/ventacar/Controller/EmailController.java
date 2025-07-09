@@ -23,6 +23,10 @@ public class EmailController {
     @Autowired
     private EmailService emailService;
 
+    public EmailController(EmailService emailService) {
+        this.emailService = emailService;
+    }
+
     /**
      * Endpoint para enviar un correo de confirmación con los detalles de un vehículo.
      * El correo incluye información como el vehículo y el precio.
@@ -36,9 +40,9 @@ public class EmailController {
             @RequestParam String vehiculo,
             @RequestParam int precio) {
         try {
-            emailService.enviarCorreoConfirmacion(vehiculo, precio);
+            emailService.enviarCorreoConfirmacionCompra(vehiculo, precio);
             return ResponseEntity.ok("Correo de confirmación enviado.");
-        } catch (MessagingException | IOException | DocumentException e) {
+        } catch (Exception e) {
             return ResponseEntity.status(500).body("Error al enviar el correo de confirmación: " + e.getMessage());
         }
     }
@@ -62,7 +66,7 @@ public class EmailController {
         try {
             emailService.enviarCorreoReserva(destinatario, vehiculo, fechaReserva, precio);
             return ResponseEntity.ok("Correo de reserva enviado.");
-        } catch (MessagingException | IOException | DocumentException e) {
+        } catch (Exception e) {
             return ResponseEntity.status(500).body("Error al enviar el correo de reserva: " + e.getMessage());
         }
     }
