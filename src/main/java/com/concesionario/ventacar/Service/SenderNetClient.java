@@ -25,7 +25,7 @@ public class SenderNetClient {
     private String bearerToken;
 
     private final RestTemplate restTemplate = new RestTemplate();
-    private static final String BASE_URL = "https://api.sender.net/v2/email";
+    private static final String BASE_URL = "https://api.sender.net/api/v2/email";
 
     public void sendRegistrationEmail(String to, String subject, String text) {
         Map<String, Object> body = Map.of(
