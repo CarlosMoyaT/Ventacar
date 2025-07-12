@@ -67,4 +67,17 @@ public class SenderNetClient {
         HttpEntity<Map<String, Object>> request = new HttpEntity<>(body, headers);
         restTemplate.postForEntity(BASE_URL, request, String.class);
     }
+
+    public String getCampaigns() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(bearerToken);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<Void> request = new HttpEntity<>(headers);
+        String url = "https://api.sender.net/v2/campaigns";
+
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, request, String.class);
+
+        return response.getBody();
+    }
 }
