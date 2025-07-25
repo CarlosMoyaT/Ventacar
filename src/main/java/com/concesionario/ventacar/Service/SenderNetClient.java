@@ -29,7 +29,7 @@ public class SenderNetClient {
 
     public void sendRegistrationEmail(String to, String subject, String text) {
         Map<String, Object> body = Map.of(
-                "from", Map.of("name", "Ventacar", "email", "tu-email-verificado@tudominio.com"),
+                "from", Map.of("name", "Ventacar", "email", "solrak_27@hotmail.com"),
                 "to", List.of(Map.of("email", to)),
                 "subject", subject,
                 "html", "<pre>" + text + "</pre>"

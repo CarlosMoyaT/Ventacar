@@ -64,7 +64,7 @@ public class AuthService {
         Optional<Role> userRole = roleRepository.findByName(RoleName.ROLE_USER);
         userRole.ifPresent(roles::add);
 
-        // Si isAdmin es verdadero, asigna el rol "ADMIN"
+        // Si es admin, asigna el rol "ADMIN"
         if (isAdmin) {
             Optional<Role> adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN);
             adminRole.ifPresent(roles::add);

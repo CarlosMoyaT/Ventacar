@@ -2,6 +2,8 @@ package com.concesionario.ventacar.Controller;
 
 import com.concesionario.ventacar.Model.User;
 import com.concesionario.ventacar.Service.AuthService;
+import com.concesionario.ventacar.Service.EmailService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,9 @@ public class  AuthController {
      * Servicio que gestiona las operaciones de autenticación y registro de usuarios.
      */
     private final AuthService authService;
+
+    @Autowired
+    private EmailService emailService;
 
     /**
      * Constructor que inyecta el servicio de autenticación.
@@ -58,6 +63,7 @@ public class  AuthController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+
     }
 
     /**

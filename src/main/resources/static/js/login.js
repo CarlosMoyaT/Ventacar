@@ -129,11 +129,12 @@ document.addEventListener("DOMContentLoaded", function () {
 			console.log(JSON.stringify(user, null, 2));
 
 			fetch("http://localhost:8080/api/auth/signup", {
-				method: "POST",
-				headers: { "Content-Type": "application/x-www-form-urlencoded" },
-				credentials: "include",
-				body: formBody
-			})
+            	method: "POST",
+            	headers: { "Content-Type": "application/json" },
+            	credentials: "include",
+            	body: JSON.stringify(user)
+            })
+
 				.then(response => {
 					if (!response.ok) {
 						if (response.status === 400) {
