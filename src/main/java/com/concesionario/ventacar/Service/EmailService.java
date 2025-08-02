@@ -53,7 +53,7 @@ public class EmailService {
      * @throws IOException        si ocurre un error al generar el PDF.
      * @throws DocumentException  si ocurre un error en el documento PDF.
      */
-    public void enviarCorreoConfirmacionCompra(String vehiculo, int precio) throws IOException, DocumentException {
+    public void enviarCorreoConfirmacionCompra(String vehiculo, int precio) throws IOException, DocumentException , MessagingException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String destinatario = auth.getName();
 
@@ -78,7 +78,7 @@ public class EmailService {
      * @throws DocumentException  si ocurre un error en el documento PDF.
      */
     public void enviarCorreoReserva(String destinatario, String vehiculo, String fechaReserva, int precio)
-            throws IOException, DocumentException {
+            throws IOException, DocumentException, MessagingException {
 
         File pdfFile = pdfService.createPdf(destinatario, vehiculo, fechaReserva, precio);
 
