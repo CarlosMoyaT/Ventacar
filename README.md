@@ -38,14 +38,7 @@ Editor: IntelliJ IDEA
 
 Seguridad: Spring Security (roles User y Admin)
 
-PDF y correo: Itext y Mailtrap. Mailersend y SMTP (para el envío de correos a los clientes)
-
--Diseño de plantillas UI-
-
-Link al diseño en Figma: https://www.figma.com/design/6uRpn3rJaPPZN0Za9UJrs3/tea3?node-id=0-1&p=f&t=uwbky68QuhGPjc9K-0
-
-Interfaz dividida entre: index.html, login.html, resultados.html, nosotros.html y detalle.html
-
+PDF y correo: Itext y Mailtrap con SMTP (para el envío de correos a los clientes)
 
 Endpoints:
 GET /api/vehiculos/buscar
@@ -56,7 +49,5 @@ GET /api/vehiculos/tipo{tipo}
 
 GET /api/vehiculos/precio
 
-Documentación del código fuente y Comentarios JavaDoc
-Estructura organizada por (Config, Model, Controller, Service, Repository)
 
-Rutas REST definidas en los controladores
+
