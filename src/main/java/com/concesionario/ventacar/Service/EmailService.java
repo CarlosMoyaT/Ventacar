@@ -2,7 +2,9 @@ package com.concesionario.ventacar.Service;
 
 import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,7 +25,7 @@ import java.util.Date;
 public class EmailService {
 
     @Autowired
-    private SenderNetClient senderNetClient;
+    private JavaMailSenderImpl mailSender;
 
     @Autowired
     private PdfService pdfService;
@@ -31,7 +33,14 @@ public class EmailService {
     public void enviarCorreoRegistro(String destinatario) {
         String subject = "Confirmación de registro";
         String text = "Gracias por registrarte en Ventacar.";
-        senderNetClient.sendRegistrationEmail(destinatario, subject, text);
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(destinatario);
+        message.setSubject(subject);
+        message.setText(text);
+        message.setFrom("no-reply@ventacar.com");
+
+        mailSender.send(message);
     }
 
     /**
@@ -51,10 +60,10 @@ public class EmailService {
         String fecha = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         File pdfFile = pdfService.createPdf(destinatario, vehiculo, fecha, precio);
 
-        String subject = "Confirmación de compra";
-        String text = "Gracias por tu compra.\nVehículo: " + vehiculo + "\nPrecio: " + precio + "\nFecha: " + fecha;
+        String asunto = "Confirmación de compra";
+        String texto = "Gracias por tu compra.\nVehículo: " + vehiculo + "\nPrecio: " + precio + "\nFecha: " + fecha;
+        enviarCorreoConAdjunto(destinatario, asunto, texto, pdfFile);
 
-        senderNetClient.sendPurchaseEmail(destinatario, subject, text, pdfFile);
     }
 
     /**
@@ -77,7 +86,22 @@ public class EmailService {
                 "Fecha de la reserva: " + fechaReserva + "\n" +
                 "Precio: " + precio;
 
-        senderNetClient.sendPurchaseEmail(destinatario, "Vehículo reservado", contenidoEmail, pdfFile);
+        enviarCorreoConAdjunto(destinatario, "Vehículo reservado", contenidoEmail, pdfFile);
+    }
+
+    private void enviarCorreoConAdjunto(String destinatario, String asunto, String texto, File adjunto) throws MessagingException {
+
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+        helper.setTo(destinatario);
+        helper.setSubject(asunto);
+        helper.setText(texto);
+        helper.setFrom("no-reply@ventacar.com");
+
+        helper.addAttachment(adjunto.getName(), adjunto);
+
+        mailSender.send(message);
     }
 
     /**

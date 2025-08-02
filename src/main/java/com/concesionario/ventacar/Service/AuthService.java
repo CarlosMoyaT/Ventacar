@@ -22,7 +22,8 @@ public class AuthService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
-    private final SenderNetClient senderNetClient;
+    private final EmailService emailService;
+
 
     /**
      * Constructor de la clase AuthService. Inyecta las dependencias necesarias para la autenticación y gestión de usuarios.
@@ -31,11 +32,11 @@ public class AuthService {
      * @param roleRepository el repositorio de roles.
      * @param passwordEncoder el codificador de contraseñas.
      */
-    public AuthService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, SenderNetClient senderNetClient) {
+    public AuthService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, EmailService emailService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
-        this.senderNetClient = senderNetClient;
+        this.emailService = emailService;
     }
 
     /**
@@ -79,7 +80,7 @@ public class AuthService {
         User user = new User(email, passwordEncoder.encode(password), nombre, apellidos, telefono, codigoPostal, fechaNacimiento, roles);
         userRepository.save(user);
 
-        senderNetClient.sendRegistrationEmail(email, "Registro en Ventacar", "Gracias por registrarte en Ventacar.");
+        emailService.enviarCorreoRegistro(email);
     }
 
 
