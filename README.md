@@ -57,7 +57,8 @@ Este endpoint permite registrar un nuevo usuario en el sistema Ventacar.
 }
 
 
-G
+
+
 
 
 
