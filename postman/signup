@@ -51,7 +51,100 @@
 				},
 				"description": "**This endpoint allows registering a new user in the Ventacar system.**\n\nIt requires the following fields in JSON format:\n\n- `email`: The user's email address.\n    \n- `password`: The user's password.\n    \n- `nombre`: The user's first name.\n    \n- `apellidos`: The user's last name.\n    \n- `telefono`: The user's phone number.\n    \n- `codigoPostal`: The user's postal code.\n    \n- `fechaNacimiento`: The user's date of birth in the format 'yyyy-MM-dd'.\n    \n\nReturns:\n\n- **200 OK**: User successfully registered.\n    \n- **400 Bad Request**: If the user already exists or a required field is missing."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get data",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"testemail@gmail.com\",\r\n  \"password\": \"12345678\",\r\n  \"nombre\": \"Juan\",\r\n  \"apellidos\": \"Pérez\",\r\n  \"telefono\": \"123456789\",\r\n  \"codigoPostal\": \"28001\",\r\n  \"fechaNacimiento\": \"1990-01-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "18"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Aug 2025 14:35:20 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Usuario registrado"
+				}
+			]
 		}
 	]
 }
