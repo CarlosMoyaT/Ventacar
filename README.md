@@ -42,7 +42,7 @@ PDF y correo: Itext y Mailtrap con SMTP (para el envío de correos a los cliente
 
 Endpoints:
 http://localhost:8080/api/auth/signup
-(docs/postman/Ventacar-API.postman_collection.json)
+[postman/signup](./postman/signup)
 
 
 GET /api/vehiculos/marca{marca}
@@ -50,6 +50,7 @@ GET /api/vehiculos/marca{marca}
 GET /api/vehiculos/tipo{tipo}
 
 GET /api/vehiculos/precio
+
 
 
 
