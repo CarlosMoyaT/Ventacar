@@ -57,11 +57,8 @@ Este endpoint permite registrar un nuevo usuario en el sistema Ventacar.
 }
 
 
-GET /api/vehiculos/marca{marca}
+G
 
-GET /api/vehiculos/tipo{tipo}
-
-GET /api/vehiculos/precio
 
 
 
