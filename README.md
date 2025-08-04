@@ -41,13 +41,16 @@ Seguridad: Spring Security (roles User y Admin)
 PDF y correo: Itext y Mailtrap con SMTP (para el envío de correos a los clientes)
 
 Endpoints:
-GET /api/vehiculos/buscar
+http://localhost:8080/api/auth/signup
+(docs/postman/Ventacar-API.postman_collection.json)
+
 
 GET /api/vehiculos/marca{marca}
 
 GET /api/vehiculos/tipo{tipo}
 
 GET /api/vehiculos/precio
+
 
 
 
