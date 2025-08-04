@@ -58,9 +58,12 @@ Este endpoint permite registrar un nuevo usuario en el sistema Ventacar.
   "codigoPostal": "28080",
   "fechaNacimiento": "1990-01-01"
 }
+### Request Body (JSON)
 {
   "message": "Usuario registrado con éxito"
 }
+
+
 
 
 
