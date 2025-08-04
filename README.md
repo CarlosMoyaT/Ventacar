@@ -40,13 +40,13 @@ Seguridad: Spring Security (roles User y Admin)
 
 PDF y correo: Itext y Mailtrap con SMTP (para el envío de correos a los clientes)
 
-### 🔐 Auth Endpoint: Signup
+## Auth Endpoint: Signup
 
 **POST** `http://localhost:8080/api/auth/signup`
 
 Este endpoint permite registrar un nuevo usuario en el sistema Ventacar.
 
-#### 📝 Request Body (JSON)
+#### Request Body (JSON)
 
 ```json
 {
@@ -58,6 +58,7 @@ Este endpoint permite registrar un nuevo usuario en el sistema Ventacar.
   "codigoPostal": "28080",
   "fechaNacimiento": "1990-01-01"
 }
+
 
 
 
