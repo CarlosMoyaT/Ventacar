@@ -46,7 +46,7 @@ PDF y correo: Itext y Mailtrap con SMTP (para el envío de correos a los cliente
 
 Este endpoint permite registrar un nuevo usuario en el sistema Ventacar.
 
-#### Request Body (JSON)
+### Request Body (JSON)
 
 ```json
 {
@@ -58,11 +58,12 @@ Este endpoint permite registrar un nuevo usuario en el sistema Ventacar.
   "codigoPostal": "28080",
   "fechaNacimiento": "1990-01-01"
 }
-### Response (JSON)
-```json
+
+Response (JSON)
 {
   "message": "Usuario registrado con éxito"
 }
+
 
 
 
