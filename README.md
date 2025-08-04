@@ -45,6 +45,7 @@ POST http://localhost:8080/api/auth/signup
 
 Este endpoint permite registrar un nuevo usuario en el sistema Ventacar.
 
+```json
 {
   "email": "usuario@example.com",
   "password": "123456",
@@ -61,6 +62,7 @@ GET /api/vehiculos/marca{marca}
 GET /api/vehiculos/tipo{tipo}
 
 GET /api/vehiculos/precio
+
 
 
 
