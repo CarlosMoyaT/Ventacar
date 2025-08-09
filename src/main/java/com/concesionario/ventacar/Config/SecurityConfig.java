@@ -150,7 +150,7 @@ public class SecurityConfig {
      * @param config configuración de autenticación de Spring.
      * @return un {@link AuthenticationManager} para procesar autenticaciones.
      * @throws Exception si ocurre un error al obtener el gestor de autenticación.
-     */1
+     */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
