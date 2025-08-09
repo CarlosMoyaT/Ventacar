@@ -20,29 +20,46 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
 
+
 /**
- * Clase de configuración de seguridad para la aplicación.
- * Configura la seguridad de Spring Security, incluyendo autorización,
- * autenticación, codificación de contraseñas y rutas públicas/protegidas.
+ * Configuración de seguridad para la aplicación del concesionario.
+ *
+ * <p>Esta clase define las reglas de autenticación, autorización,
+ * configuración de CORS, cifrado de contraseñas y manejo de autenticación
+ * personalizada para la aplicación.</p>
+ *
+ * <p>Utiliza Spring Security para proteger las rutas, permitiendo
+ * el acceso público a ciertos recursos y restringiendo otros según el rol
+ * del usuario.</p>
+ *
+ * @author Carlos
  */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
     /**
-     * Servicio personalizado para la carga de detalles de usuario.
+     * Servicio personalizado para la carga de detalles de usuario,
+     * utilizado en la autenticación.
      */
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
     /**
-     * Configura la cadena de filtros de seguridad para manejar
-     * la autorización y autenticación HTTP.
+     * Configura la cadena de filtros de seguridad de Spring Security.
      *
-     * @param http el objeto {@link HttpSecurity} utilizado para construir la configuración.
-     * @return el {@link SecurityFilterChain} configurado.
-     * @throws Exception si ocurre algún error al construir la cadena de filtros.
+     * <p>Define:</p>
+     * <ul>
+     *   <li>Rutas públicas y protegidas según rol.</li>
+     *   <li>Configuración de login y logout.</li>
+     *   <li>Desactivación de CSRF y activación de CORS.</li>
+     * </ul>
+     *
+     * @param http objeto {@link HttpSecurity} para configurar las reglas.
+     * @return instancia de {@link SecurityFilterChain} con la configuración aplicada.
+     * @throws Exception si ocurre un error durante la configuración.
      */
+
     @Bean
     @Order
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -83,6 +100,11 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /**
+     * Configuración de CORS para permitir solicitudes desde el frontend.
+     *
+     * @return un {@link CorsConfigurationSource} con orígenes, métodos y cabeceras permitidas.
+     */
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
@@ -98,11 +120,10 @@ public class SecurityConfig {
     }
 
 
-
     /**
-     * Crea un bean de codificador de contraseñas usando BCrypt.
+     * Define el codificador de contraseñas a utilizar.
      *
-     * @return una instancia de {@link BCryptPasswordEncoder}.
+     * @return un {@link PasswordEncoder} basado en {@link BCryptPasswordEncoder}.
      */
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -110,10 +131,10 @@ public class SecurityConfig {
     }
 
     /**
-     * Configura el proveedor de autenticación que usa un servicio de detalles de usuario
-     * y un codificador de contraseñas.
+     * Proveedor de autenticación que utiliza {@link CustomUserDetailsService}
+     * y {@link BCryptPasswordEncoder}.
      *
-     * @return el {@link DaoAuthenticationProvider} configurado.
+     * @return un {@link DaoAuthenticationProvider} configurado.
      */
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -124,12 +145,12 @@ public class SecurityConfig {
     }
 
     /**
-     * Expone un bean de {@link AuthenticationManager} a partir de la configuración proporcionada.
+     * Gestiona la autenticación en la aplicación.
      *
-     * @param config la configuración de autenticación.
-     * @return el {@link AuthenticationManager} configurado.
-     * @throws Exception si ocurre un error al obtener el administrador de autenticación.
-     */
+     * @param config configuración de autenticación de Spring.
+     * @return un {@link AuthenticationManager} para procesar autenticaciones.
+     * @throws Exception si ocurre un error al obtener el gestor de autenticación.
+     */1
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();

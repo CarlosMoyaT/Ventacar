@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.concesionario.ventacar"},{"l":"com.concesionario.ventacar.Config"},{"l":"com.concesionario.ventacar.Controller"},{"l":"com.concesionario.ventacar.Model"},{"l":"com.concesionario.ventacar.Repository"},{"l":"com.concesionario.ventacar.Service"}];updateSearchResults();
