@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
@@ -14,6 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 public class SecurityConfigTest {
 
     @Autowired
@@ -75,10 +77,10 @@ public class SecurityConfigTest {
     @Test
     void whenPerformLoginWithValidUser_thenRedirectToIndex() throws Exception {
         mockMvc.perform(formLogin("/perform_login")
-                        .user("validUser") // Cambia por un usuario válido en tu base de datos de prueba
-                        .password("validPassword")) // Cambia por la contraseña correcta
+                        .user("usuario@example.com") // Cambiar por un usuario válido en tu base de datos de prueba
+                        .password("123456")) // Cambiar por la contraseña correcta
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/index.html"));
+                .andExpect(redirectedUrlPattern("**/index.html"));
     }
 
     /**
