@@ -77,8 +77,8 @@ public class SecurityConfigTest {
     @Test
     void whenPerformLoginWithValidUser_thenRedirectToIndex() throws Exception {
         mockMvc.perform(formLogin("/perform_login")
-                        .user("usuario@example.com") // Cambiar por un usuario válido en tu base de datos de prueba
-                        .password("123456")) // Cambiar por la contraseña correcta
+                        .user("usuario@example.com")
+                        .password("123456"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrlPattern("**/index.html"));
     }
