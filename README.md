@@ -34,9 +34,7 @@ Servicios web: RESTful API
 
 Servidor web: Tomcat 10.1
 
-Editor: IntelliJ IDEA
-
-Seguridad: Spring Security (roles User y Admin)
+Seguridad: Spring Security 
 
 PDF y correo: Itext y Mailtrap con SMTP (para el envío de correos a los clientes)
 
@@ -63,6 +61,7 @@ Response (JSON)
 {
   "message": "Usuario registrado con éxito"
 }
+
 
 
 
