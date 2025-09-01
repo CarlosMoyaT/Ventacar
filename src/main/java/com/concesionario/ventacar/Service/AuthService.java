@@ -54,7 +54,7 @@ public class AuthService {
      * @param isAdmin un valor booleano que indica si el usuario debe tener el rol "ADMIN".
      * @throws RuntimeException si el usuario ya existe o si no se pudo asignar ningún rol al usuario.
      */
-    public void registerUser(String email, String password, String nombre, String apellidos, String telefono, String codigoPostal, String fechaNacimiento, boolean isAdmin) {
+    public void registerUser(String email, String password, String nombre, String apellidos, String telefono, String codigoPostal, String fechaNacimiento, boolean isAdmin) throws Exception {
         if (userRepository.findByEmail(email) != null) {
             throw new RuntimeException("El usuario ya existe");
         }

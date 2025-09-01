@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
  */
 @RestController
 @RequestMapping("/api/auth")
-public class  AuthController {
+public class AuthController {
 
     /**
      * Servicio que gestiona las operaciones de autenticación y registro de usuarios.
