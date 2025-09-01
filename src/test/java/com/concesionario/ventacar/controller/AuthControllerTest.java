@@ -44,7 +44,7 @@ public class AuthControllerTest {
 
     @Test
     public void signUpShouldReturnOk_whenRegistrationSucceeds() throws Exception {
-        AuthController controller = new AuthController(new FakeAuthService(null, null, null, null, "Error de registro"));
+        AuthController controller = new AuthController(new FakeAuthService(null,null,null,null));
 
         SignupRequestDTO request = new SignupRequestDTO();
         request.setEmail("test@test.com");
@@ -55,6 +55,7 @@ public class AuthControllerTest {
         request.setCodigoPostal("28001");
         request.setFechaNacimiento("1990-01-01");
 
+
         ResponseEntity<String> response = controller.signUp(request);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -63,7 +64,7 @@ public class AuthControllerTest {
 
     @Test
     public void signUpShouldReturnBadRequest_whenRegistrationFails() {
-        AuthController controller = new AuthController(new FakeAuthService(null, null, null, null, "Error de registro"));
+        AuthController controller = new AuthController(new FakeAuthService(null, null, null, null,"Error de registro"));
 
         SignupRequestDTO request = new SignupRequestDTO();
         request.setEmail("fail@test.com");
