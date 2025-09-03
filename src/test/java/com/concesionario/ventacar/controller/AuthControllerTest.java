@@ -1,11 +1,14 @@
 package com.concesionario.ventacar.controller;
 
 import com.concesionario.ventacar.Controller.AuthController;
+import com.concesionario.ventacar.Model.User;
 import com.concesionario.ventacar.Repository.RoleRepository;
 import com.concesionario.ventacar.Repository.UserRepository;
 import com.concesionario.ventacar.Service.AuthService;
 import com.concesionario.ventacar.Service.EmailService;
 import com.concesionario.ventacar.dto.SignupRequestDTO;
+import com.concesionario.ventacar.dto.LoginRequestDTO;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,10 +43,28 @@ public class AuthControllerTest {
                 throw new Exception(errorMessage);
             }
         }
+
+        public FakeAuthService() {
+            super(null, null, null, null);
+        }
+
+        public FakeAuthService(boolean shouldFail) {
+            super(null, null, null, null);
+            this.shouldFail = shouldFail;
+        }
+
+        @Override
+        public User authenticateUser(String email, String password) {
+            if (shouldFail) {
+                return null;
+            }
+            return new User();
+        }
     }
 
+    @DisplayName("Debería devolver 200 OK cuando el registro de usuario se completa con éxito")
     @Test
-    public void signUpShouldReturnOk_whenRegistrationSucceeds() throws Exception {
+    void signUp_should_returnOk_when_registration_succeeds() throws Exception {
         AuthController controller = new AuthController(new FakeAuthService(null,null,null,null));
 
         SignupRequestDTO request = new SignupRequestDTO();
@@ -62,8 +83,9 @@ public class AuthControllerTest {
         assertEquals("Usuario registrado", response.getBody());
     }
 
+    @DisplayName("Devolverá error en caso de que el registro de usuario falle")
     @Test
-    public void signUpShouldReturnBadRequest_whenRegistrationFails() {
+    void signUp_should_return_badRequest_when_registrationFails() {
         AuthController controller = new AuthController(new FakeAuthService(null, null, null, null,"Error de registro"));
 
         SignupRequestDTO request = new SignupRequestDTO();
@@ -80,5 +102,29 @@ public class AuthControllerTest {
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         assertEquals("Error de registro", response.getBody());
     }
+
+    @DisplayName("Devolverá OK si el login se completa con exito")
+    @Test
+    void login_should_return_login_succeeds() {
+        AuthController controller = new AuthController(new FakeAuthService(null, null, null, null));
+
+        LoginRequestDTO loginRequest = new LoginRequestDTO();
+        loginRequest.setEmail("test@example.com");
+        loginRequest.setPassword("123456");
+
+        ResponseEntity<String> response = controller.login(loginRequest);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals("Login correcto", response.getBody());
+
+
+    }
+
+    @Test
+    void login_should_return_login_fails() {
+
+    }
+
+
 
 }
