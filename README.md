@@ -1,64 +1,33 @@
-VENTACAR
+# 🚗 Ventacar
 
 ![Captura de pantalla](src/main/assets/Captura.JPG)
 
-Ventacar es una aplicación web para la compra y reserva de coches. Ofrece una plataforma sencilla y accesible donde los usuarios pueden reservar o comprar un coche de su elección
+**Ventacar** es una aplicación web para la compra y reserva de coches.  
+Ofrece una plataforma sencilla y accesible donde los usuarios pueden **registrarse, explorar el catálogo, reservar o comprar un coche**, y recibir facturas personalizadas por correo electrónico.
 
--Funcionalidades básicas-
+---
 
-Registro y autenticación de usuarios (login/logout)
+## Funcionalidades
+- Registro y autenticación de usuarios (login/logout).
+- Listado de vehículos con filtros de búsqueda.
+- Visualización de los detalles del coche (modelo, precio, características).
+- Reserva o compra del vehículo.
+- Generación de facturas en PDF personalizadas.
+- Envío automático de facturas por correo tras compra o reserva.
 
-Listado de vehículos con filtros de búsqueda.
+---
 
-Visualización de los detalles del coche (modelo, precio, características).
+## Tecnologías utilizadas
+- **Lenguaje & Frameworks**: Java (JDK 22), Spring Boot, Jakarta EE 9  
+- **Frontend**: HTML, CSS, JavaScript  
+- **Backend**: Java + Spring Boot  
+- **Base de datos**: PostgreSQL  
+- **Servicios web**: RESTful API  
+- **Servidor**: Tomcat 10.1  
+- **Seguridad**: Spring Security  
+- **Otros**: iText (PDF), Mailtrap SMTP (correo)  
 
-Reserva o compra del vehículo.
 
-Generación de facturas (PDF) personalizadas para el usuario.
-
-Envío de correos con factura integrada tanto para compras como para reservas de coches.
-
--Tecnologías-
-
-Versión: JDK22, Jakarta EE 9
-
-Frontend: HTML, CSS, JavaScript
-
-Backend: Java, Spring Boot
-
-Bases de datos: PostgreSQL
-
-Servicios web: RESTful API
-
-Servidor web: Tomcat 10.1
-
-Seguridad: Spring Security 
-
-PDF y correo: Itext y Mailtrap con SMTP (para el envío de correos a los clientes)
-
-## Auth Endpoint: Signup
-
-**POST** `http://localhost:8080/api/auth/signup`
-
-Este endpoint permite registrar un nuevo usuario en el sistema Ventacar.
-
-#### Request Body (JSON)
-
-```json
-{
-  "email": "usuario@example.com",
-  "password": "123456",
-  "nombre": "Carlos",
-  "apellidos": "Moya",
-  "telefono": "123456789",
-  "codigoPostal": "28080",
-  "fechaNacimiento": "1990-01-01"
-}
-
-Response (JSON)
-{
-  "message": "Usuario registrado con éxito"
-}
 
 
 
