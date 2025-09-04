@@ -1,4 +1,4 @@
-# 🚗 Ventacar
+# Ventacar
 
 ![Captura de pantalla](src/main/assets/Captura.JPG)
 
@@ -26,6 +26,7 @@ Ofrece una plataforma sencilla y accesible donde los usuarios pueden **registrar
 - **Servidor**: Tomcat 10.1  
 - **Seguridad**: Spring Security  
 - **Otros**: iText (PDF), Mailtrap SMTP (correo)  
+
 
 
 
