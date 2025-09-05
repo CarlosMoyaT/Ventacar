@@ -120,8 +120,19 @@ public class AuthControllerTest {
 
     }
 
+    @DisplayName("Devolverá UNAUTHORIZED si el login es incorrecto")
     @Test
     void login_should_return_login_fails() {
+        AuthController controller = new AuthController(new FakeAuthService(true));
+
+        LoginRequestDTO loginRequest = new LoginRequestDTO();
+        loginRequest.setEmail("fail@example.com");
+        loginRequest.setPassword("123456");
+
+        ResponseEntity<String> response = controller.login(loginRequest);
+
+        assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
+        assertEquals("Login incorrecto", response.getBody());
 
     }
 
