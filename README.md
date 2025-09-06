@@ -18,7 +18,7 @@ Ofrece una plataforma sencilla y accesible donde los usuarios pueden **registrar
 ---
 
 ## Tecnologías utilizadas
-- **Lenguaje & Frameworks**: Java (JDK 22), Spring Boot, Jakarta EE 9  
+- **Lenguaje & Frameworks**: Java (JDK 23), Spring Boot, Jakarta EE 9  
 - **Frontend**: HTML, CSS, JavaScript  
 - **Backend**: Java + Spring Boot  
 - **Base de datos**: PostgreSQL  
@@ -26,6 +26,7 @@ Ofrece una plataforma sencilla y accesible donde los usuarios pueden **registrar
 - **Servidor**: Tomcat 10.1  
 - **Seguridad**: Spring Security  
 - **Otros**: iText (PDF), Mailtrap SMTP (correo)  
+
 
 
 
