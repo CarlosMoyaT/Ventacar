@@ -19,10 +19,10 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    @Value("${security.jwt.secret-key}")
+    @Value("${security.jwt.secret}")
     private String secretKey;
 
-    @Value("${security.jwt.expiration-time}")
+    @Value("${security.jwt.expiration:86400000}")
     private long jwtExpiration;
 
     public String extractUsername(String token) {
@@ -57,7 +57,7 @@ public class JwtService {
                 .compact();
     }
 
-    public boolean isTokenValid(String token, UserDetails userDetails) {
+    public boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
@@ -83,4 +83,6 @@ public class JwtService {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
+
+
 }
