@@ -45,7 +45,7 @@ public class JwtService {
     public long getJwtExpirationTime() {
         return jwtExpiration;
     }
-
+    // corregir posible deprecated
     private String buildToken(Map<String, Object> extraClaims, UserDetails userDetails, long expiration) {
         return Jwts
                 .builder()
@@ -72,7 +72,7 @@ public class JwtService {
 
     private Claims extractAllClaims(String token) {
         return Jwts
-                .parserBuilder()
+                .parser()
                 .setSigningKey(getSignInKey())
                 .build()
                 .parseClaimsJws(token)
