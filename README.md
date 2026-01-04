@@ -25,7 +25,21 @@ Ofrece una plataforma sencilla y accesible donde los usuarios pueden **registrar
 - **Servicios web**: RESTful API  
 - **Servidor**: Tomcat 10.1  
 - **Seguridad**: Spring Security  
-- **Otros**: iText (PDF), Mailtrap SMTP (correo)  
+- **Otros**: iText (PDF), Mailtrap SMTP (correo)
+
+### Autenticación con JWT
+
+Este proyecto usa JWT (JSON Web Tokens) para autenticar usuarios y proteger endpoints.
+
+Flujo principal:
+1. El usuario se registra con username y password.
+2. El usuario hace login y obtiene un token JWT firmado.
+3. Para acceder a endpoints protegidos, debe enviar el token en el header:
+   `Authorization: Bearer <token>`.
+4. Spring Security valida el token y aplica permisos según roles.
+
+
+
 
 
 
