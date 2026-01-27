@@ -73,7 +73,7 @@ public class JwtService {
                 .verifyWith(getSigningKey())
                 .build()
                 .parseSignedClaims(token)
-                .getBody();
+                .getPayload();
     }
 
     private SecretKey getSigningKey() {

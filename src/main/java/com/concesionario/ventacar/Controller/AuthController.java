@@ -2,37 +2,23 @@ package com.concesionario.ventacar.Controller;
 
 import com.concesionario.ventacar.Model.User;
 import com.concesionario.ventacar.Service.AuthService;
-import com.concesionario.ventacar.Service.EmailService;
+import com.concesionario.ventacar.Service.JwtService;
 import com.concesionario.ventacar.dto.LoginRequestDTO;
 import com.concesionario.ventacar.dto.SignupRequestDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
-/**
- * Controlador REST encargado de la autenticación de usuarios en la aplicación.
- * <p>
- * Proporciona endpoints para el registro de nuevos usuarios y el inicio de sesión.
- * </p>
- * <p>
- * URL base: <code>/api/auth</code>
- * </p>
- *
- * @since 1.0
- * @version 1.0
- */
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    /**
-     * Servicio que gestiona las operaciones de autenticación y registro de usuarios.
-     */
-    private final AuthService authService;
 
-    @Autowired
-    private EmailService emailService;
+    private final AuthService authService;
+    private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
 
 
     public AuthController(AuthService authService) {
@@ -40,16 +26,6 @@ public class AuthController {
     }
 
 
-    /**
-     * Endpoint para registrar un nuevo usuario en el sistema.
-     * <p>
-     * Recibe un {@link SignupRequestDTO} con los datos necesarios para el registro.
-     * </p>
-     *
-     * @param request DTO que contiene los datos de registro del usuario.
-     * @return {@link ResponseEntity} con mensaje de éxito o error.
-     * @throws Exception si ocurre algún error durante el registro.
-     */
     @PostMapping("/signup")
     public ResponseEntity<String> signUp(@RequestBody SignupRequestDTO request) {
         try {
@@ -69,18 +45,6 @@ public class AuthController {
         }
     }
 
-
-    /**
-     * Endpoint para autenticar un usuario existente.
-     * <p>
-     * Recibe un objeto {@link User} con el correo y la contraseña.
-     * Si la autenticación es correcta, devuelve un mensaje de éxito.
-     * Si falla, devuelve un mensaje de error con el estado HTTP 401.
-     * </p>
-     *
-     * @param user Usuario que intenta iniciar sesión.
-     * @return {@link ResponseEntity} con mensaje de éxito o fallo de autenticación.
-     */
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequestDTO request) {
         User authenticatedUser = authService.authenticateUser(request.getEmail(), request.getPassword());
