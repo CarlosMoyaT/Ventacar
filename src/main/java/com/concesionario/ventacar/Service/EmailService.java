@@ -3,7 +3,6 @@ package com.concesionario.ventacar.Service;
 import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
@@ -17,42 +16,32 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Servicio para el envío de correos electrónicos con archivos PDF adjuntos,
- * como confirmaciones de compra o reservas de vehículos.
- */
+
 @Service
 public class EmailService {
 
     @Autowired
     private JavaMailSenderImpl mailSender;
 
-    @Autowired
-    private PdfService pdfService;
 
-    public void enviarCorreoRegistro(String destinatario) {
-        String subject = "Confirmación de registro";
-        String text = "Gracias por registrarte en Ventacar.";
+    public void sendEmail(EmailDTO emailDTO) throws MessagingException {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(destinatario);
-        message.setSubject(subject);
-        message.setText(text);
-        message.setFrom("no-reply@ventacar.com");
+        helper.setTo(emailDTO.getDestinatario());
+        helper.setSubject(emailDTO.getAsunto());
+        helper.setText(emailDTO.getCuerpo(), emailDTO.isHtml());
+        helper.setFrom(emailDTO.getRemitente());
+
+        if (emailDTO.getAdjuntos() != null) {
+            for (EmailAttachmentDTO adjunto : emailDTO.getAdjuntos()) {
+                helper.addAttachment(adjunto.getNombre(), adjunto.getArchivo());
+            }
+        }
 
         mailSender.send(message);
     }
 
-    /**
-     * Envía un correo de confirmación de compra al usuario autenticado,
-     * incluyendo un archivo PDF adjunto con los detalles.
-     *
-     * @param vehiculo nombre o descripción del vehículo comprado.
-     * @param precio   precio del vehículo.
-     * @throws MessagingException si ocurre un error al enviar el correo.
-     * @throws IOException        si ocurre un error al generar el PDF.
-     * @throws DocumentException  si ocurre un error en el documento PDF.
-     */
     public void enviarCorreoConfirmacionCompra(String vehiculo, int precio) throws IOException, DocumentException , MessagingException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String destinatario = auth.getName();
@@ -66,17 +55,6 @@ public class EmailService {
 
     }
 
-    /**
-     * Envía un correo de confirmación de reserva con un archivo PDF adjunto.
-     *
-     * @param destinatario   dirección de correo del cliente.
-     * @param vehiculo       nombre o modelo del vehículo reservado.
-     * @param fechaReserva   fecha en formato 'yyyy-MM-dd'.
-     * @param precio         precio del vehículo reservado.
-     * @throws MessagingException si ocurre un error al enviar el correo.
-     * @throws IOException        si ocurre un error al generar el PDF.
-     * @throws DocumentException  si ocurre un error en el documento PDF.
-     */
     public void enviarCorreoReserva(String destinatario, String vehiculo, String fechaReserva, int precio)
             throws IOException, DocumentException, MessagingException {
 
@@ -104,13 +82,6 @@ public class EmailService {
         mailSender.send(message);
     }
 
-    /**
-     * Convierte una fecha en formato texto ('yyyy-MM-dd') a un objeto {@link Date}.
-     *
-     * @param fechaReserva la fecha como cadena.
-     * @return un objeto {@link Date} representando la fecha.
-     * @throws IllegalArgumentException si el formato es inválido.
-     */
     private Date parseFecha(String fechaReserva) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

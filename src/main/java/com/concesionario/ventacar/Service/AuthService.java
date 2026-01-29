@@ -80,7 +80,7 @@ public class AuthService {
         User user = new User(email, passwordEncoder.encode(password), nombre, apellidos, telefono, codigoPostal, fechaNacimiento, roles);
         userRepository.save(user);
 
-        emailService.enviarCorreoRegistro(email);
+        emailService.sendEmail(email);
     }
 
 
