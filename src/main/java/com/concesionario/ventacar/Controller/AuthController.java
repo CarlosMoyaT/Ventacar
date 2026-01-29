@@ -4,6 +4,7 @@ import com.concesionario.ventacar.Model.User;
 import com.concesionario.ventacar.Service.AuthService;
 import com.concesionario.ventacar.Service.JwtService;
 import com.concesionario.ventacar.dto.LoginRequestDTO;
+import com.concesionario.ventacar.dto.LoginResponseDTO;
 import com.concesionario.ventacar.dto.SignupRequestDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -65,6 +66,7 @@ public class AuthController {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String jwt = jwtService.generateToken(userDetails);
 
+
             return ResponseEntity.ok(new LoginResponseDTO(jwt, "Bearer"));
         } catch (AuthenticationException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
@@ -72,3 +74,4 @@ public class AuthController {
         }
     }
 }
+
